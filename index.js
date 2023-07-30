@@ -1,15 +1,17 @@
 const express = require("express");
 const morgan = require("morgan");
-const cors = require('cors');
+const cors = require("cors");
 
 const app = express();
 
 app.use(express.json());
 
 app.use(cors()); // middleware that allows cross origin requests.
-app.use(morgan('tiny'));
-app.use(morgan({format:':body', immediate: true})); // using a format string
-morgan.token('body', res => { return JSON.stringify(res.body)})
+app.use(morgan("tiny"));
+app.use(morgan({ format: ":body", immediate: true })); // using a format string
+morgan.token("body", (res) => {
+  return JSON.stringify(res.body);
+});
 // const requestLogger = (request, response, next) => {
 //     console.log('Method:', request.method);
 //     console.log('Path:  ', request.path);
@@ -19,8 +21,8 @@ morgan.token('body', res => { return JSON.stringify(res.body)})
 //   }
 
 const unknownEndpoint = (request, response) => {
-    response.status(404).send({ error: 'unknown endpoint' });
-}
+  response.status(404).send({ error: "unknown endpoint" });
+};
 
 let persons = [
   {
@@ -53,7 +55,7 @@ app.get("/info", (request, response) => {
 });
 
 // fetch entire array
-app.get("/", (request, response) => {
+app.get("/api/persons", (request, response) => {
   response.json(persons);
 });
 
@@ -69,7 +71,7 @@ app.get("/api/persons/:id", (request, response) => {
                        <h3> Phone : ${person.number} </h3> `);
   } else {
     response.status(404).json({
-        error: "person not found, contact does not exist",
+      error: "person not found, contact does not exist",
     });
   }
 });
@@ -90,7 +92,6 @@ app.post("/api/persons", (request, response) => {
     response.status(400).json({
       error: "name or number missing",
     });
-
   }
 
   const names = persons.map((name) => name.name?.toLowerCase());
@@ -110,15 +111,14 @@ app.post("/api/persons", (request, response) => {
 
   persons = persons.concat(person);
 
-  app.use(morgan({format:':body', immediate: true})); // using a format string
+  app.use(morgan({ format: ":body", immediate: true })); // using a format string
 
-  morgan.token('body', req => { return JSON.stringify(req.body)})
+  morgan.token("body", (req) => {
+    return JSON.stringify(req.body);
+  });
 
   response.json(person);
-  
 });
-
-
 
 // delete a person from list
 app.delete("/api/persons/:id", (request, response) => {
@@ -130,7 +130,7 @@ app.delete("/api/persons/:id", (request, response) => {
 app.use(unknownEndpoint);
 
 // const PORT = 3001;
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
