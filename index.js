@@ -2,18 +2,13 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require('cors');
 
-
 const app = express();
 
 app.use(express.json());
 
 app.use(cors()); // middleware that allows cross origin requests.
-
-
-
 app.use(morgan('tiny'));
 app.use(morgan({format:':body', immediate: true})); // using a format string
-
 morgan.token('body', res => { return JSON.stringify(res.body)})
 // const requestLogger = (request, response, next) => {
 //     console.log('Method:', request.method);
@@ -135,7 +130,7 @@ app.delete("/api/persons/:id", (request, response) => {
 app.use(unknownEndpoint);
 
 // const PORT = 3001;
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
