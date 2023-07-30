@@ -53,7 +53,7 @@ app.get("/info", (request, response) => {
 });
 
 // fetch entire array
-app.get("/api/persons", (request, response) => {
+app.get("/", (request, response) => {
   response.json(persons);
 });
 
