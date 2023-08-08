@@ -2,8 +2,9 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 
-app.use(cors()); // middleware that allows cross origin requests.
 const app = express();
+app.use(cors()); // middleware that allows cross origin requests.
+
 
 app.use(express.json());
 
