@@ -9,10 +9,10 @@ app.use(cors()); // middleware that allows cross origin requests.
 app.use(express.json());
 
 app.use(morgan("tiny"));
-app.use(morgan({ format: ":body", immediate: true })); // using a format string
-morgan.token("body", (res) => {
-  return JSON.stringify(res.body);
-});
+// app.use(morgan(":body", options)); // using a format string
+// morgan.token("body", (res) => {
+//   return JSON.stringify(res.body);
+// });
 // const requestLogger = (request, response, next) => {
 //     console.log('Method:', request.method);
 //     console.log('Path:  ', request.path);
