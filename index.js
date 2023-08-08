@@ -7,7 +7,6 @@ app.use(cors()); // middleware that allows cross origin requests.
 app.use(express.static('build'))
 
 app.use(express.json());
-console.log("hello");
 
 app.use(morgan("tiny"));
 // app.use(morgan(":body", options)); // using a format string
