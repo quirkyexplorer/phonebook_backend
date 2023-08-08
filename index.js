@@ -2,11 +2,11 @@ const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 
+app.use(cors()); // middleware that allows cross origin requests.
 const app = express();
 
 app.use(express.json());
 
-app.use(cors()); // middleware that allows cross origin requests.
 app.use(morgan("tiny"));
 app.use(morgan({ format: ":body", immediate: true })); // using a format string
 morgan.token("body", (res) => {
