@@ -4,7 +4,7 @@ const cors = require("cors");
 
 const app = express();
 app.use(cors()); // middleware that allows cross origin requests.
-
+app.use(express.static('build'))
 
 app.use(express.json());
 
