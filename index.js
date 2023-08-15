@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 const morgan = require("morgan");
-
+app.use(cors()); // middleware that allows cross origin requests.
 const Contact = require("./models/contact");
 
 const requestLogger = (request, response, next) => {
@@ -18,7 +18,7 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: "unknown endpoint" });
 };
 
-app.use(cors()); // middleware that allows cross origin requests.
+
 app.use(express.static("build"));
 app.use(express.json());
 app.use(requestLogger);
