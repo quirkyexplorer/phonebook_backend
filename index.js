@@ -86,8 +86,8 @@ app.put("/api/contacts/:id", (request, response, next) => {
   const body = request.body;
 
   const contact = {
-    name: body.content,
-    number: body.important,
+    name: body.name,
+    number: body.number,
   };
 
   Contact.findByIdAndUpdate(request.params.id, contact, { new: true })
