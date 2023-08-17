@@ -5,12 +5,13 @@ require("dotenv").config();
 const morgan = require("morgan");
 app.use(cors()); // middleware that allows cross origin requests.
 const Contact = require("./models/contact");
+const logger = require("./utils/logger");
 
 const requestLogger = (request, response, next) => {
-  console.log("Method:", request.method);
-  console.log("Path:  ", request.path);
-  console.log("Body:  ", request.body);
-  console.log("---");
+  logger.info("Method:", request.method);
+  logger.info("Path:  ", request.path);
+  logger.info("Body:  ", request.body);
+  logger.info("---");
   next();
 };
 
@@ -55,7 +56,7 @@ app.get("/api/contacts/:id", (request, response) => {
       }
     })
     .catch((error) => {
-      console.log(error);
+      logger.info(error);
       response.status(400).send({ error: "malformatted id" });
     });
 });
@@ -109,7 +110,7 @@ app.use(unknownEndpoint);
 // const PORT = 3001;
 const PORT = process.env.PORT;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  logger.info(`Server running on port ${PORT}`);
 });
 
 const errorHandler = (error, request, response, next) => {
